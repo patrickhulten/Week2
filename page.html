@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>React Import External JSON</title>
+	<style>
+		ol {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
+
+		li {
+			display: inline-block;
+      padding: 20px;
+      border: 1px solid black;
+
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+	<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+	<div id="myApp"></div>
+
+  <script type="text/babel">
+  "use strict";
+
+    function ProjectList(props) {
+      return <div>
+          <ol>
+            {
+              props.list.map( 
+                (item,index) => (
+                  <li key={index}>
+                    <a href={item.link}>
+                      {item.firstname} {item.last}
+                    </a>
+                  </li>
+                )
+              )
+            }
+          </ol>
+        </div>;
+    }
+
+  $.getJSON("anything", function(jsonFromJquery) {
+    ReactDOM.render(
+      <ProjectList list={jsonFromJquery} />,
+      document.getElementById("myApp")
+    );
+  }
+  );
+  </script>
+</body>
+
+</html>
